@@ -1,0 +1,12 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: pvc-azuredisk
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 256Gi  # minimum size of shared disk is 256GB (P15)
+  volumeMode: Block
+  storageClassName: managed-csi

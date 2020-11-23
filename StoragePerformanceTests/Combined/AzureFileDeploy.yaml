@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: azure-file
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: azure-file
+  template:
+    metadata:
+      labels:
+        app: azure-file
+    spec:
+      containers:
+      - name: ubuntu
+        image: ubuntu:16.04
+        command: [ "/bin/bash", "-c", "--" ]
+        args: [ "while true; do sleep 30; done;" ]
+        volumeMounts:
+        - name: standard-volume
+          mountPath: "/mnt/shared-standard"
+        - name: rook-volume
+          mountPath: "/mnt/rook"
+      volumes:
+        - name: standard-volume
+          persistentVolumeClaim:
+            claimName: azure-file-standard-pvc
+        - name: rook-volume
+          persistentVolumeClaim:
+            claimName: rook-fs-pvc 

@@ -1,0 +1,22 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: azure-file-premium-pod
+spec:
+  containers:
+  - name: ubuntu
+    image: ubuntu:16.04
+    command: [ "/bin/bash", "-c", "--" ]
+    args: [ "while true; do sleep 30; done;" ]
+    volumeMounts:
+    - name: standard-volume
+      mountPath: "/mnt/shared-standard"
+    - name: rook-volume
+      mountPath: "/mnt/rook"
+  volumes:
+    - name: standard-volume
+      persistentVolumeClaim:
+        claimName: azure-file-standard-pvc
+    - name: rook-volume
+      persistentVolumeClaim:
+        claimName: rook-fs-pvc

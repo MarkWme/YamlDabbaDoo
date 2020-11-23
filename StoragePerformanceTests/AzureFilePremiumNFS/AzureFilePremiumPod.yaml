@@ -1,0 +1,17 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: azure-file-premium-nfs-pod
+spec:
+  containers:
+  - name: ubuntu
+    image: ubuntu:16.04
+    command: [ "/bin/bash", "-c", "--" ]
+    args: [ "while true; do sleep 30; done;" ]
+    volumeMounts:
+    - mountPath: "/mnt/shared-premium-nfs"
+      name: volume
+  volumes:
+    - name: volume
+      persistentVolumeClaim:
+        claimName: azure-file-premium-nfs-pvc

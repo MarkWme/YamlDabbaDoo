@@ -1,0 +1,39 @@
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: azurefile
+provisioner: kubernetes.io/azure-file
+mountOptions:
+  - dir_mode=0777
+  - file_mode=0777
+  - uid=0
+  - gid=0
+  - mfsymlinks
+  - cache=strict
+parameters:
+  skuName: Standard_LRS
+---
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: azurefilepremium
+provisioner: kubernetes.io/azure-file
+mountOptions:
+  - dir_mode=0777
+  - file_mode=0777
+  - uid=0
+  - gid=0
+  - mfsymlinks
+  - cache=strict
+parameters:
+  storageAccount: psauksazfiles
+  skuName: Premium_LRS
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: azurefilepremiumnfs
+provisioner: file.csi.azure.com
+parameters:
+  storageAccount: psauksazfilesnfs
+  protocol: nfs
