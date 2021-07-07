@@ -11,5 +11,5 @@ spec:
         args: ["-n","5000","-c","500","-z","10m","http://acisimpleapi.westeurope.azurecontainer.io:3000/api/getVersion"]
         imagePullPolicy: Always
       restartPolicy: Never
-  completions: 10
-  parallelism: 10
+  completions: 50
+  parallelism: 50
