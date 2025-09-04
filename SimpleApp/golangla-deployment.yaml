@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: golangla-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: golangla-app
+  template:
+    metadata:
+      labels:
+        app: golangla-app
+    spec:
+      containers:
+      - name: golangla-app
+        image: msazuredev.azurecr.io/golangla:latest
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 250m
+            memory: 256Mi
+        ports:
+        - containerPort: 3000
